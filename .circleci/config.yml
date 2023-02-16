@@ -3,6 +3,13 @@ jobs:
   build:
     docker:
       - image: cimg/openjdk:19.0.2
+      - image: cimg/postgres:15.1
+        auth:
+          username: $DOCKERHUB_PASSWORD
+          password: $DOCKERHUB_USERNAME
+        environment:
+          POSTGRES_USER: postgres
+
 
     working_directory: ~/repo
 
@@ -30,7 +37,7 @@ jobs:
       # run tests!
       - run:
           name: Running test
-          command: gradle test
+          command: gradle test -PspringProfiles=circleci
 
       # Upload test coverage
       - run:
