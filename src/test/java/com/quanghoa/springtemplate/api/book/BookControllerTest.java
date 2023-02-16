@@ -37,7 +37,7 @@ class BookControllerTest {
         this.mvc.perform(MockMvcRequestBuilders.get(BASE_URL))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(books.size()))
-                .andExpect(jsonPath("$[0].id").value(books.get(0).getId()))
+                .andExpect(jsonPath("$[0].id").value(books.get(0).getId().toString()))
                 .andExpect(jsonPath("$[0].name").value(books.get(0).getName()));
 
         verify(bookService).findAll();

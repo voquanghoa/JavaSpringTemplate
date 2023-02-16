@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.0.2'
     id 'io.spring.dependency-management' version '1.1.0'
+    id "org.flywaydb.flyway" version '8.0.4'
     id 'jacoco'
 }
 
@@ -15,6 +16,14 @@ configurations {
     }
 }
 
+flyway {
+    url = 'jdbc:postgresql://localhost:5432/bookstore?searchpath=public'
+    user = 'postgres'
+    password = 'postgres'
+    locations = ['classpath:db/migration/COMMON', 'classpath:db/migration/DEV']
+}
+
+
 repositories {
     mavenCentral()
 }
@@ -27,6 +36,14 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.12.0'
 
     annotationProcessor 'org.projectlombok:lombok'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.data:spring-data-relational:3.0.1'
+
+    implementation 'org.flywaydb:flyway-core'
+    runtimeOnly 'org.postgresql:postgresql'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 }
