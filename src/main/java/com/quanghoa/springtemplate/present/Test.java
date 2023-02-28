@@ -6,41 +6,63 @@ class Book {}
 
 class Author {}
 
-class MySQL {
+interface DataBase {
 
-    <T> List<T> query() {
+    <T> List<T> query();
+
+    void closeConnection();
+}
+
+class MySQL implements DataBase {
+
+    public <T> List<T> query() {
         return null;
     }
 
-    void closeConnection() {
+    public void closeConnection() {
 
     }
 }
 
+class Postgres implements DataBase {
+
+    public <T> List<T> query() {
+        return null;
+    }
+
+    public void closeConnection() {
+
+    }
+}
+
+class MySQLEx extends MySQL {
+
+}
+
 class BookService {
 
-    private final MySQL mySQL;
+    private final DataBase dataBase;
 
-    public BookService(MySQL mySQL) {
-        this.mySQL = mySQL;
+    public BookService(DataBase dataBase) {
+        this.dataBase = dataBase;
     }
 
     public void queryBooks() {
-        final List<Book> books = mySQL.query();
+        final List<Book> books = dataBase.query();
         // do something
     }
 }
 
 class AuthorService {
 
-    private final MySQL mySQL;
+    private final DataBase dataBase;
 
-    public AuthorService(MySQL mySQL) {
-        this.mySQL = mySQL;
+    public AuthorService(DataBase dataBase) {
+        this.dataBase = dataBase;
     }
 
     public void queryAuthors() {
-        final List<Author> author = mySQL.query();
+        final List<Author> author = dataBase.query();
         // do something
     }
 }
@@ -51,7 +73,12 @@ public class Test {
         final var mysql = new MySQL();
 
         final var bookService = new BookService(mysql);
+
         final var authorService = new AuthorService(mysql);
+
+
+        final var bookServiceEx = new BookService(new MySQLEx());
+        final var bookServicePostgress = new BookService(new Postgres());
 
         bookService.queryBooks();
         authorService.queryAuthors();
