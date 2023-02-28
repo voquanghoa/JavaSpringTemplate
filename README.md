@@ -37,7 +37,7 @@ definition_
 | Property  | Required |
 |:---------:|:--------:|
 |    id     |    ✓     |
-|   email   |    ✓     |
+| username  |    ✓     |
 | password  |    ✓     |
 | firstName |    ✗     |
 | lastName  |    ✗     |
