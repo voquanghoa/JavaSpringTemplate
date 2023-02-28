@@ -8,7 +8,9 @@
 
 [![codecov](https://codecov.io/gh/voquanghoa/JavaSpringTemplate/branch/main/graph/badge.svg?token=KXPWZ8UT3Q)](https://codecov.io/gh/voquanghoa/JavaSpringTemplate)
 
-# Requirements
+---
+
+# Assignment Requirements
 
 ## Introduction
 
@@ -56,7 +58,6 @@ definition_
 | created_at  |    ✓     |
 | updated_at  |    ✓     |
 |    image    |    ✗     |
-|   enabled   |    ✓     |
 |   user_id   |    ✓     |
 
 ## Endpoints
@@ -71,8 +72,15 @@ Base URL: `api/v1/auths`
     - Response
         - Success: An object with JWT token
         - Failed: 401 error
+
+## Profiles
+
+Base URL: `api/v1/profiles`. All endpoints required logged in
+
 - GET (Required authenticated)
     - Get the current user's information
+- PUT
+    - Update current user's profile
 
 ### Users
 
@@ -90,8 +98,10 @@ Base URL: `api/v1/books`.
 
 - GET: Get all available books (allow anonymous)
 - GET: Get book by ID (allow anonymous)
-- POST: create a book (require Contributor OR ADMIN)
+- POST: create a book (require logged in)
 - PUT: Update a book
     - If user is ADMIN --> Allow
     - If user is Contributor --> Check if the user is the book's owner
 - DELETE: delete a book (Check role like PUT)
+
+---
