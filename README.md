@@ -122,6 +122,7 @@ Base URL: `api/v1/books`.
 3. Add database
     - Add migration files to create the database tables following the requirement
     - Add migration file to create two roles
+    - Add migration file to create an admin
     - Run the application with docker started
     - Make sure the database tables were created with the correct structure and relationships
     - Check the roles were created
