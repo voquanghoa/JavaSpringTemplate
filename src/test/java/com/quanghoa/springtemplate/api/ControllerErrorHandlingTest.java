@@ -12,13 +12,13 @@ class ControllerErrorHandlingTest {
     private final ControllerErrorHandling controllerErrorHandling = new ControllerErrorHandling();
 
     @Test
-    void shouldHandleForbiddenError_OK() {
+    void shouldHandleDomainException_OK() {
         final var error = new NotFoundException("Message");
-        final var response = controllerErrorHandling.handleForbiddenError(error);
+        final var response = controllerErrorHandling.handleDomainException(error);
 
         assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatusCodeValue());
         assertNotNull(response.getBody());
-        
+
         assertEquals("Message", response.getBody().getMessage());
         assertNotNull(response.getBody().getOccurAt());
     }
