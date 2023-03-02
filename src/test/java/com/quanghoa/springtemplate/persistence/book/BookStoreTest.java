@@ -10,7 +10,9 @@ import java.util.Optional;
 
 import static com.quanghoa.springtemplate.fakes.BookFakes.buildBookEntities;
 import static com.quanghoa.springtemplate.fakes.BookFakes.buildBookEntity;
+import static java.util.UUID.randomUUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -45,5 +47,16 @@ class BookStoreTest {
 
         assertEquals(bookOpt, bookRepository.findById(book.getId()));
         verify(bookRepository).findById(book.getId());
+    }
+
+    @Test
+    void shouldFindById_Empty() {
+        final var id = randomUUID();
+        final Optional<BookEntity> bookOpt = Optional.empty();
+        when(bookRepository.findById(id))
+                .thenReturn(bookOpt);
+
+        assertFalse(bookRepository.findById(id).isPresent());
+        verify(bookRepository).findById(id);
     }
 }
