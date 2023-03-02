@@ -6,7 +6,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static com.quanghoa.springtemplate.fakes.BookFakes.buildBookEntities;
+import static com.quanghoa.springtemplate.fakes.BookFakes.buildBookEntity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,5 +34,16 @@ class BookStoreTest {
         assertEquals(expected.size(), bookStore.findAll().size());
 
         verify(bookRepository).findAll();
+    }
+
+    @Test
+    void shouldFindById_OK() {
+        final var book = buildBookEntity();
+        final var bookOpt = Optional.of(book);
+        when(bookRepository.findById(book.getId()))
+                .thenReturn(bookOpt);
+
+        assertEquals(bookOpt, bookRepository.findById(book.getId()));
+        verify(bookRepository).findById(book.getId());
     }
 }

@@ -1,13 +1,14 @@
 package com.quanghoa.springtemplate.domain.book;
 
 
-import com.quanghoa.springtemplate.error.NotFoundException;
 import com.quanghoa.springtemplate.persistence.book.BookStore;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+
+import static com.quanghoa.springtemplate.domain.book.BookError.supplyBookNotFound;
 
 @Service
 @RequiredArgsConstructor
@@ -19,8 +20,8 @@ public class BookService {
         return bookStore.findAll();
     }
 
-    public Book findById(final UUID uuid) {
-        return bookStore.findById(uuid)
-                .orElseThrow(() -> new NotFoundException("Book with id %s could not be found", uuid));
+    public Book findById(final UUID id) {
+        return bookStore.findById(id)
+                .orElseThrow(supplyBookNotFound(id));
     }
 }
