@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '2.7.7'
     id 'io.spring.dependency-management' version '1.0.14.RELEASE'
     id "org.flywaydb.flyway" version '8.0.4'
+    id 'java-test-fixtures'
     id 'jacoco'
 }
 
@@ -33,7 +34,10 @@ repositories {
 }
 
 dependencies {
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -45,7 +49,6 @@ dependencies {
     implementation 'org.projectlombok:lombok'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
 
-    annotationProcessor 'org.projectlombok:lombok'
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -56,6 +59,8 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    testFixturesCompileOnly 'org.projectlombok:lombok'
+    testFixturesAnnotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {
