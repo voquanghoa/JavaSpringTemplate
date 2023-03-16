@@ -15,7 +15,7 @@ import static com.quanghoa.springtemplate.api.book.BookDTOMapper.toBookDTO;
 import static com.quanghoa.springtemplate.api.book.BookDTOMapper.toBookDTOs;
 
 @RestController
-@RequestMapping("/api/v1/books")
+@RequestMapping("api/v1/books")
 @RequiredArgsConstructor
 public class BookController {
 
